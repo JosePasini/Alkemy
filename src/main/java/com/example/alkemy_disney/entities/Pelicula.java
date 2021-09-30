@@ -28,14 +28,14 @@ public class Pelicula implements Serializable {
     private String titulo;
     private Date fecha;
     private int calificacion;
-
+/*
     @FieldNameConstants.Exclude
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "peliculas")
     private List<Personaje> personajes;// = new ArrayList<>();
 
-/*
+
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
