@@ -25,6 +25,6 @@ public class Genero implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Pelicula> peliculas = new ArrayList<>();
+    private List<Pelicula> peliculas;
 
 }

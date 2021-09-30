@@ -26,16 +26,17 @@ public class Personaje implements Serializable {
     private float peso;
 
 
-
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @FieldNameConstants.Exclude
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.MERGE})
     @JoinTable(
             name = "personaje_pelicula",
             joinColumns = @JoinColumn(name = "personaje_id"),
             inverseJoinColumns = @JoinColumn(name = "pelicula_id")
     )
     private List<Pelicula> peliculas;// = new ArrayList<>();
+
+
 
 }

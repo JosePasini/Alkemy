@@ -1,12 +1,15 @@
 package com.example.alkemy_disney.services;
 
+import com.example.alkemy_disney.DTO.PersonajeDto;
 import com.example.alkemy_disney.entities.Personaje;
 import com.example.alkemy_disney.repositories.BaseRepository;
 import com.example.alkemy_disney.repositories.PersonajeRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +23,7 @@ public class PersonajeServiceImpl extends BaseServiceImpl<Personaje, Long> imple
         super(baseRepository);
     }
 
+    private ModelMapper mapper = new ModelMapper();
 
     @Override
     @Transactional
@@ -84,40 +88,24 @@ public class PersonajeServiceImpl extends BaseServiceImpl<Personaje, Long> imple
 
 
     @Override
-    public List<Personaje> obtener_imagen_y_nombre() throws Exception {
+    public List<Personaje> buscar_personaje() throws Exception {
         try{
-            System.out.println("Por cargar la lista SERVICE");
-            List<Personaje> personajeList =  personajeRepository.obtener_imagen_y_nombre();
-            System.out.println("Lista cargada SERVICE");
-            return personajeList;
+            List<Personaje> personajes = personajeRepository.findAll();
+            return personajes;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
-
-
 
     @Override
-    public List<Personaje> buscar_personaje(String filtro) throws Exception {
+    public List<Personaje> buscar_personajes_completos() throws Exception {
         try{
-            List<Personaje> personajeList =  personajeRepository.buscar_personaje(filtro);
-            return personajeList;
+            List<Personaje> personajes = personajeRepository.findAll();
+            return personajes;
         } catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
-
-    /*
-    @Override
-    public List<Personaje> buscar_personaje(String filtroNombre, int filtroEdad) throws Exception {
-        try{
-            List<Personaje> personajeList =  personajeRepository.buscar_personaje_filtro_avanzado(filtroNombre,filtroEdad);
-            return personajeList;
-        } catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-*/
 
 
 }

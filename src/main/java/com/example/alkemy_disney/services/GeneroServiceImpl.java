@@ -1,10 +1,14 @@
 package com.example.alkemy_disney.services;
 
+import com.example.alkemy_disney.DTO.GeneroDto;
 import com.example.alkemy_disney.entities.Genero;
 import com.example.alkemy_disney.repositories.BaseRepository;
 import com.example.alkemy_disney.repositories.GeneroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import org.modelmapper.*;
+
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -15,6 +19,8 @@ public class GeneroServiceImpl extends BaseServiceImpl<Genero, Long> implements 
 
     @Autowired
     private GeneroRepository generoRepository;
+
+    private static ModelMapper mapper = new ModelMapper();
 
     public GeneroServiceImpl(BaseRepository<Genero, Long> baseRepository) {
         super(baseRepository);
@@ -54,6 +60,46 @@ public class GeneroServiceImpl extends BaseServiceImpl<Genero, Long> implements 
             throw new Exception(e.getMessage());
         }
     }
+
+
+    //###################################################
+    //###################################################
+
+
+    public GeneroDto mapToDto(Genero genero) throws Exception{
+        try {
+            GeneroDto generoDto = mapper.map(genero, GeneroDto.class);
+            return generoDto;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public Genero mapToEntity(GeneroDto generoDto) throws Exception{
+        try{
+            Genero genero = mapper.map(generoDto, Genero.class);
+            return genero;
+        } catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public Genero saveDto(GeneroDto generoDto) throws Exception {
+        try{
+            Genero genero = mapper.map(generoDto, Genero.class);
+            return generoRepository.save(genero);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
+
+
+    //###################################################
+    //###################################################
 
     @Override
     @Transactional

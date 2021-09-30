@@ -1,8 +1,10 @@
 package com.example.alkemy_disney.services;
 
 import com.example.alkemy_disney.entities.Pelicula;
+import com.example.alkemy_disney.entities.Personaje;
 import com.example.alkemy_disney.repositories.BaseRepository;
 import com.example.alkemy_disney.repositories.PeliculaRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
 
     @Autowired
     private PeliculaRepository peliculaRepository;
+
+    private ModelMapper mapper = new ModelMapper();
 
     public PeliculaServiceImpl(BaseRepository<Pelicula, Long> baseRepository) {
         super(baseRepository);
@@ -46,6 +50,7 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
     @Transactional
     public Pelicula save(Pelicula entity) throws Exception {
         try{
+
             entity = baseRepository.save(entity);
             return entity;
         }catch (Exception e){
@@ -81,7 +86,6 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
         }
     }
 
-
     @Override
     public List<Pelicula> obtener_peliculas() throws Exception {
         try{
@@ -91,4 +95,7 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
+
+
+
 }
