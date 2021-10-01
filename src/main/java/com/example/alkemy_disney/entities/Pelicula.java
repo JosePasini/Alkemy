@@ -1,6 +1,8 @@
 package com.example.alkemy_disney.entities;
 
+import com.example.alkemy_disney.DTO.PeliculaCompletoDto;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -26,14 +28,14 @@ public class Pelicula implements Serializable {
     private String titulo;
     private Date fecha;
 
-    @Min(value = 1,message="El mínimo es 1")
-    @Max(value = 5,message="El máximo es 5")
+    @Min(value = 1, message = "El mínimo es 1")
+    @Max(value = 5, message = "El máximo es 5")
     private int calificacion;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "peliculas")
-    private List<Personaje> personajes;// = new ArrayList<>();
+    private List<Personaje> personajes;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -42,4 +44,26 @@ public class Pelicula implements Serializable {
     private Genero genero;
 
 
+    private static ModelMapper mapper = new ModelMapper();
+
+    public static Pelicula mapToEntity(PeliculaCompletoDto peliculaCompletoDto) throws Exception {
+        try {
+            Pelicula pelicula = mapper.map(peliculaCompletoDto, Pelicula.class);
+            return pelicula;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public static List<Pelicula> maptoEntityList(List<PeliculaCompletoDto> peliculaCompletoDto) throws Exception {
+        try {
+            List<Pelicula> peliculas = new ArrayList<>();
+            for (PeliculaCompletoDto p : peliculaCompletoDto) {
+                peliculas.add(mapToEntity(p));
+            }
+            return peliculas;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
 }

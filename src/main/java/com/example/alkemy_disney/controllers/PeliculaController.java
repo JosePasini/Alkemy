@@ -6,10 +6,7 @@ import com.example.alkemy_disney.entities.Pelicula;
 import com.example.alkemy_disney.services.PeliculaServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,18 @@ public class PeliculaController extends BaseControllerImpl<Pelicula, PeliculaSer
             List<Pelicula> peliculaList = servicio.findAll();
             List<PeliculaCompletoDto> peliculaCompletoDtos = PeliculaCompletoDto.mapToDtoList(peliculaList);
             return ResponseEntity.status(HttpStatus.OK).body(peliculaCompletoDtos);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \"" + e.getMessage() + "\"}"));
+        }
+    }
+
+    @PostMapping(value = "/save_pelicula")
+    public ResponseEntity<?> guardar_pelicula_completa(@RequestBody PeliculaCompletoDto peliculaCompletoDto) throws Exception{
+        try{
+            Pelicula pelicula = Pelicula.mapToEntity(peliculaCompletoDto);
+            this.servicio.save(pelicula);
+            PeliculaCompletoDto peliculaCompletoDto1 = PeliculaCompletoDto.mapToDto(pelicula);
+            return ResponseEntity.status(HttpStatus.OK).body(peliculaCompletoDto1);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(("{\"error\": \"" + e.getMessage() + "\"}"));
         }

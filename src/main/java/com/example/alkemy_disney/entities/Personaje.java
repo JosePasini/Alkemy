@@ -35,7 +35,7 @@ public class Personaje implements Serializable {
             joinColumns = @JoinColumn(name = "personaje_id"),
             inverseJoinColumns = @JoinColumn(name = "pelicula_id")
     )
-    private List<Pelicula> peliculas;// = new ArrayList<>();
+    private List<Pelicula> peliculas;
 
 
 

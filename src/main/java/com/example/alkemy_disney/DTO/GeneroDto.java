@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GeneroDto implements Serializable {
     private static final long serialVersionUID = 1L;
-
+    private Long id;
     private String nombre;
     private String imagen;
 
