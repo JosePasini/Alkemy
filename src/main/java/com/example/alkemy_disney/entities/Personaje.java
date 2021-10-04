@@ -29,14 +29,25 @@ public class Personaje implements Serializable {
     private float peso;
 
 
+    /*
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "personaje_pelicula",
             joinColumns = @JoinColumn(name = "personaje_id"),
             inverseJoinColumns = @JoinColumn(name = "pelicula_id")
     )
-    private List<Pelicula> peliculas;
+    private List<Pelicula> peliculas= new ArrayList<>();
+*/
+
+    @ToString.Exclude
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "personaje_pelicula",
+            joinColumns = @JoinColumn(name = "personaje_id"),
+            inverseJoinColumns = @JoinColumn(name = "pelicula_id")
+    )
+    private List<Pelicula> peliculas= new ArrayList<>();
 
     private static ModelMapper mapper = new ModelMapper();
 

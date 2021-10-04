@@ -27,26 +27,30 @@ public class Pelicula implements Serializable {
 
     private String imagen;
     private String titulo;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
 
     @Min(value = 1, message = "El mínimo es 1")
     @Max(value = 5, message = "El máximo es 5")
     private int calificacion;
 
-
+    /*
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "peliculas",cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Personaje> personajes = new ArrayList<>();
+*/
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "peliculas",cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Personaje> personajes;
-
-
+    private List<Personaje> personajes = new ArrayList<>();
 
     @ToString.Exclude
     @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "genero")
     private Genero genero;
-
 
     private static ModelMapper mapper = new ModelMapper();
 
