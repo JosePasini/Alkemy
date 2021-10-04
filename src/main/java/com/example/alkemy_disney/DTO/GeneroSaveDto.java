@@ -21,8 +21,8 @@ public class GeneroSaveDto implements Serializable {
     private String nombre;
     private String imagen;
 
-    //@JsonIgnoreProperties(value = {"genero", "personajes"})
-    @JsonIgnoreProperties(value = {"personajes"})
+    @JsonIgnoreProperties(value = {"genero", "personajes"})
+    //@JsonIgnoreProperties(value = {"personajes"})
     private List<Pelicula> peliculas;
 
     private static ModelMapper mapper = new ModelMapper();

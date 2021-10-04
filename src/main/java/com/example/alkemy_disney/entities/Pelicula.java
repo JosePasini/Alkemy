@@ -33,13 +33,26 @@ public class Pelicula implements Serializable {
     @Max(value = 5, message = "El máximo es 5")
     private int calificacion;
 
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "peliculas", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    private List<Personaje> personajes;
+
 
     @ToString.Exclude
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "peliculas", fetch = FetchType.EAGER,cascade = {CascadeType.MERGE})
+    private List<Personaje> personajes;
+
+
+
+
+
+
+
+
+
+
+
+
+    @ToString.Exclude
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "genero")
     private Genero genero;
 

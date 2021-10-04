@@ -25,8 +25,10 @@ public class PeliculaSaveDto {
     private Date fecha;
     private int calificacion;
 
-    private List<Personaje> personajes;
+    @JsonIgnoreProperties(value = "peliculas")
+    private List<Personaje> personajes = new ArrayList<>();
 
+    @JsonIgnoreProperties(value = "peliculas")
     private Genero genero;
 
     private static ModelMapper mapper = new ModelMapper();

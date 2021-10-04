@@ -24,8 +24,9 @@ public class PersonajeCompletoDto {
     private float peso;
 
 
-    @JsonIgnoreProperties(value = {"personajes", "genero"})
-    private List<Pelicula> peliculas;
+    //@JsonIgnoreProperties(value = {"personajes", "genero"})
+    @JsonIgnoreProperties(value = {"personajes"})
+    private List<PeliculaCompletoDto> peliculas;
 
 
     private static ModelMapper mapper = new ModelMapper();
