@@ -15,25 +15,25 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GeneroDto implements Serializable {
+public class GeneroSaveDto implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String nombre;
     private String imagen;
 
-    @JsonIgnoreProperties(value = {"genero", "personajes"})
-    //@JsonIgnoreProperties(value = {"personajes"})
-    private List<Pelicula> peliculas = new ArrayList<>();
+    //@JsonIgnoreProperties(value = {"genero", "personajes"})
+    @JsonIgnoreProperties(value = {"personajes"})
+    private List<Pelicula> peliculas;
 
     private static ModelMapper mapper = new ModelMapper();
 
-    public static GeneroDto mapToDto(Genero genero){
-        GeneroDto generoDto = mapper.map(genero, GeneroDto.class);
+    public static GeneroSaveDto mapToDto(Genero genero){
+        GeneroSaveDto generoDto = mapper.map(genero, GeneroSaveDto.class);
         return generoDto;
     }
 
-    public static List<GeneroDto> mapToDtoList(List<Genero> generos){
-        List<GeneroDto> generoDtoList = new ArrayList<>();
+    public static List<GeneroSaveDto> mapToDtoList(List<Genero> generos){
+        List<GeneroSaveDto> generoDtoList = new ArrayList<>();
         for (Genero g : generos){
             generoDtoList.add(mapToDto(g));
         }

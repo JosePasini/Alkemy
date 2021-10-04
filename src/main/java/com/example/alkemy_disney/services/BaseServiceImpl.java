@@ -51,10 +51,14 @@ public abstract class BaseServiceImpl<E, Lomg> implements BaseService<E, Long>{
     @Transactional
     public E update(Long id, E entity) throws Exception {
         try{
-            Optional<E> entityOptional = baseRepository.findById(id);
-            E entityUpdate = entityOptional.get();
-            entityUpdate = baseRepository.save(entity);
-            return entityUpdate;
+            if (baseRepository.findById(id).isPresent()) {
+                Optional<E> entityOptional = baseRepository.findById(id);
+                E entityUpdate = entityOptional.get();
+                entityUpdate = baseRepository.save(entity);
+                return entityUpdate;
+            } else {
+                return null;
+            }
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

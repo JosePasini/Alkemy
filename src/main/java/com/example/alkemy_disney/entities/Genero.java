@@ -1,6 +1,9 @@
 package com.example.alkemy_disney.entities;
 
+import com.example.alkemy_disney.DTO.GeneroDto;
+import com.example.alkemy_disney.DTO.GeneroSaveDto;
 import lombok.*;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,7 +27,31 @@ public class Genero implements Serializable {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(cascade = {CascadeType.ALL, CascadeType.MERGE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Pelicula> peliculas;
+
+    private static ModelMapper mapper = new ModelMapper();
+
+    public static Genero mapToEntity(GeneroSaveDto generoDto) throws Exception {
+        try {
+            Genero genero = mapper.map(generoDto, Genero.class);
+            return genero;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public static List<Genero> mapToEntityList(List<GeneroSaveDto> generoDtoList) throws Exception {
+        try {
+            List<Genero> generos = new ArrayList<>();
+            for (GeneroSaveDto g: generoDtoList) {
+                generos.add(mapToEntity(g));
+            }
+            return generos;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
 
 }

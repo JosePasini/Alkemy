@@ -1,5 +1,6 @@
 package com.example.alkemy_disney.services;
 
+import com.example.alkemy_disney.DTO.PeliculaCompletoDto;
 import com.example.alkemy_disney.entities.Pelicula;
 import com.example.alkemy_disney.entities.Personaje;
 import com.example.alkemy_disney.repositories.BaseRepository;
@@ -79,6 +80,7 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
     public boolean delete(Long id) throws Exception {
         try{
             if (baseRepository.existsById(id)){
+
                 baseRepository.deleteById(id);
                 return true;
             } else {
@@ -88,6 +90,7 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
             throw new Exception(e.getMessage());
         }
     }
+
 
     @Override
     public List<Pelicula> obtener_peliculas() throws Exception {

@@ -63,13 +63,9 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody PersonajeCompletoDto personajeCompletoDto){
         try{
-            if (1 == 1){
                 Personaje personaje = Personaje.mapToEntity(personajeCompletoDto);
                 PersonajeCompletoDto personajeCompletoDto1 = PersonajeCompletoDto.mapToDto(this.servicio.save(personaje));
                 return ResponseEntity.status(HttpStatus.OK).body(personajeCompletoDto1);
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  ERROR. No se pudo guardar.  |♀~~~ ");
-            }
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  ERROR  |♀~~~ ");
         }
@@ -79,16 +75,31 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
     public ResponseEntity<?> delete(@PathVariable Long id){
         try{
             if (servicio.delete(id)) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Eliminado\":\" "+ servicio.delete(id) +"\"}");
-                //return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Eliminado\":\" "+ (id) +"\"}");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"No se encontró el ID indicado.\"}");
-
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"No se encontró el ID: "+ (id) +  "\"}");
             }
         } catch(Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. por favor itente nuevamente.\"}");
         }
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id,@RequestBody PersonajeCompletoDto personajeCompletoDto){
+        try{
+            Personaje personaje = Personaje.mapToEntity(personajeCompletoDto);
+            if (this.servicio.update(id, personaje) != null){
+                PersonajeCompletoDto personajeCompletoDto1 = PersonajeCompletoDto.mapToDto(personaje);
+                return ResponseEntity.status(HttpStatus.OK).body(personajeCompletoDto1);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error al actualizar. Intente nuevamente más tarde.\"}");
+            }
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. por favor itente nuevamente.\"}");
+        }
+    }
+
+
 
 
 }

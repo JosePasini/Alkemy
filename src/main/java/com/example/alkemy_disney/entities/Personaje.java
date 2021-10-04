@@ -30,7 +30,7 @@ public class Personaje implements Serializable {
 
 
     @ToString.Exclude
-    @ManyToMany(cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
             name = "personaje_pelicula",
             joinColumns = @JoinColumn(name = "personaje_id"),
