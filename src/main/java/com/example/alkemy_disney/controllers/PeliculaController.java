@@ -27,7 +27,7 @@ public class PeliculaController extends BaseControllerImpl<Pelicula, PeliculaSer
         }
     }
 
-    @GetMapping(value = "/get_all")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<?> getAll() throws Exception{
         try{
             List<Pelicula> peliculaList = servicio.findAll();
@@ -66,8 +66,7 @@ public class PeliculaController extends BaseControllerImpl<Pelicula, PeliculaSer
 
     // Pruebas Delete
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity borrar_pelicula(@PathVariable Long id)
-    throws Exception{
+    public ResponseEntity borrar_pelicula(@PathVariable Long id) {
         try{
             return ResponseEntity.status(HttpStatus.OK).body(this.servicio.delete(id));
         } catch (Exception e){

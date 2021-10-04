@@ -23,7 +23,6 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
     private GeneroServiceImpl generoService;
 
 
-
     @GetMapping(value = "/characters")
     public ResponseEntity<?> busqueda(){
         try{
@@ -35,7 +34,7 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
         }
     }
 
-    @GetMapping(value = "/view_all")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<?> view_personajes(){
         try{
             List<Personaje> personajeList = servicio.buscar_personajes_completos();
@@ -61,6 +60,35 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
         }
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<?> create(@RequestBody PersonajeCompletoDto personajeCompletoDto){
+        try{
+            if (1 == 1){
+                Personaje personaje = Personaje.mapToEntity(personajeCompletoDto);
+                PersonajeCompletoDto personajeCompletoDto1 = PersonajeCompletoDto.mapToDto(this.servicio.save(personaje));
+                return ResponseEntity.status(HttpStatus.OK).body(personajeCompletoDto1);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  ERROR. No se pudo guardar.  |♀~~~ ");
+            }
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  ERROR  |♀~~~ ");
+        }
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        try{
+            if (servicio.delete(id)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"Eliminado\":\" "+ servicio.delete(id) +"\"}");
+                //return ResponseEntity.status(HttpStatus.NO_CONTENT).body(servicio.delete(id));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"No se encontró el ID indicado.\"}");
+
+            }
+        } catch(Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. por favor itente nuevamente.\"}");
+        }
+    }
 
 
 }

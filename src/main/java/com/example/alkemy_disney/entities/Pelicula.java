@@ -64,7 +64,7 @@ public class Pelicula implements Serializable {
         }
     }
 
-    public static List<Pelicula> maptoEntityList(List<PeliculaCompletoDto> peliculaCompletoDto) throws Exception {
+    public static List<Pelicula> mapToEntityList(List<PeliculaCompletoDto> peliculaCompletoDto) throws Exception {
         try {
             List<Pelicula> peliculas = new ArrayList<>();
             for (PeliculaCompletoDto p : peliculaCompletoDto) {
