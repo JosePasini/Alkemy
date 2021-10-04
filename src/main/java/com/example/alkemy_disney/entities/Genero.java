@@ -27,7 +27,7 @@ public class Genero implements Serializable {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "genero" ,cascade = {CascadeType.MERGE})
+    @OneToMany(mappedBy = "genero" ,cascade = {CascadeType.PERSIST})
     private List<Pelicula> peliculas;
 
     private static ModelMapper mapper = new ModelMapper();

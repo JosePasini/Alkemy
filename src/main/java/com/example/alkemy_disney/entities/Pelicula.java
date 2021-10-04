@@ -37,22 +37,13 @@ public class Pelicula implements Serializable {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(mappedBy = "peliculas", fetch = FetchType.EAGER,cascade = {CascadeType.MERGE})
+    @ManyToMany(mappedBy = "peliculas",cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private List<Personaje> personajes;
 
 
 
-
-
-
-
-
-
-
-
-
     @ToString.Exclude
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "genero")
     private Genero genero;
 
