@@ -27,9 +27,7 @@ public class Personaje implements Serializable {
 
 
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @FieldNameConstants.Exclude
-    @ManyToMany(cascade = {CascadeType.ALL, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "personaje_pelicula",
             joinColumns = @JoinColumn(name = "personaje_id"),

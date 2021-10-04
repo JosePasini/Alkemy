@@ -39,9 +39,13 @@ public class PersonajeServiceImpl extends BaseServiceImpl<Personaje, Long> imple
     @Override
     @Transactional
     public Personaje findById(Long id) throws Exception {
-        try{
-            Optional<Personaje> entityOptional = baseRepository.findById(id);
-            return entityOptional.get();
+        try {
+            if (baseRepository.findById(id).isPresent()) {
+                Optional<Personaje> entityOptional = baseRepository.findById(id);
+                return entityOptional.get();
+            } else {
+                return null;
+            }
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -79,7 +83,7 @@ public class PersonajeServiceImpl extends BaseServiceImpl<Personaje, Long> imple
                 baseRepository.deleteById(id);
                 return true;
             } else {
-                throw new Exception();
+                return false;
             }
         }catch (Exception e){
             throw new Exception(e.getMessage());

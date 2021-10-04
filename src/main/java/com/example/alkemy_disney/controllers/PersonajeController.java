@@ -46,6 +46,21 @@ public class PersonajeController extends BaseControllerImpl<Personaje, Personaje
         }
     }
 
+    @GetMapping("/getOne/{id}")
+    public ResponseEntity<?> getOne(@PathVariable Long id){
+        try{
+            if (this.servicio.findById(id) != null){
+                Personaje personaje = this.servicio.findById(id);
+                PersonajeCompletoDto personajeCompletoDto = PersonajeCompletoDto.mapToDto(personaje);
+                return ResponseEntity.status(HttpStatus.OK).body(personajeCompletoDto);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  Personaje no encontrado  |♀~~~ ");
+            }
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("~~~♀|  ERROR  |♀~~~ ");
+        }
+    }
+
 
 
 }

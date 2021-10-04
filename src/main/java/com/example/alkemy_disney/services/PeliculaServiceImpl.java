@@ -39,8 +39,12 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
     @Transactional
     public Pelicula findById(Long id) throws Exception {
         try{
-            Optional<Pelicula> entityOptional = baseRepository.findById(id);
-            return entityOptional.get();
+            if (baseRepository.findById(id).isPresent()) {
+                Optional<Pelicula> entityOptional = baseRepository.findById(id);
+                return entityOptional.get();
+            } else {
+                return null;
+            }
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -50,7 +54,6 @@ public class PeliculaServiceImpl extends BaseServiceImpl<Pelicula, Long> impleme
     @Transactional
     public Pelicula save(Pelicula entity) throws Exception {
         try{
-
             entity = baseRepository.save(entity);
             return entity;
         }catch (Exception e){

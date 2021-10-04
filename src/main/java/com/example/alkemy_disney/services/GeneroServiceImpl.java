@@ -43,8 +43,12 @@ public class GeneroServiceImpl extends BaseServiceImpl<Genero, Long> implements 
     @Transactional
     public Genero findById(Long id) throws Exception {
         try{
-            Optional<Genero> entityOptional = baseRepository.findById(id);
-            return entityOptional.get();
+            if (baseRepository.findById(id).isPresent()) {
+                Optional<Genero> entityOptional = baseRepository.findById(id);
+                return entityOptional.get();
+            } else {
+                return null;
+            }
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

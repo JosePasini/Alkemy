@@ -1,6 +1,7 @@
 package com.example.alkemy_disney.entities;
 
 import com.example.alkemy_disney.DTO.PeliculaCompletoDto;
+import com.example.alkemy_disney.DTO.PeliculaSaveDto;
 import lombok.*;
 import org.modelmapper.ModelMapper;
 
@@ -38,8 +39,7 @@ public class Pelicula implements Serializable {
     private List<Personaje> personajes;
 
     @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "genero")
     private Genero genero;
 
@@ -49,6 +49,15 @@ public class Pelicula implements Serializable {
     public static Pelicula mapToEntity(PeliculaCompletoDto peliculaCompletoDto) throws Exception {
         try {
             Pelicula pelicula = mapper.map(peliculaCompletoDto, Pelicula.class);
+            return pelicula;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public static Pelicula mapToEntity(PeliculaSaveDto peliculaSaveDto) throws Exception {
+        try {
+            Pelicula pelicula = mapper.map(peliculaSaveDto, Pelicula.class);
             return pelicula;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -66,4 +75,7 @@ public class Pelicula implements Serializable {
             throw new Exception(e.getMessage());
         }
     }
+
+
+
 }
