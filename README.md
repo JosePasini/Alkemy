@@ -1,7 +1,7 @@
 # Alkemy
 Challenge Alkemy. Api Rest - Spring boot.
 
-#Vista Previa POSTMAN:
+# Vista Previa POSTMAN:
 ** Método POST **
 ![aaaaa](https://user-images.githubusercontent.com/65823769/141305878-4f23b128-357c-4b55-a047-d05718685c18.png)
 
