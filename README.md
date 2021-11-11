@@ -2,20 +2,20 @@
 Challenge Alkemy. Api Rest - Spring boot.
 
 # Vista Previa POSTMAN:
-** Método POST **
+# ** Método POST **
 ![aaaaa](https://user-images.githubusercontent.com/65823769/141305878-4f23b128-357c-4b55-a047-d05718685c18.png)
 
-** Método GetAll **
+# ** Método GetAll **
 ![aaaaa2](https://user-images.githubusercontent.com/65823769/141307925-638e53f7-5570-4b3a-9a63-262a5b219168.png)
 
-** Método GetOne **
+# ** Método GetOne **
 ![aaaaa3](https://user-images.githubusercontent.com/65823769/141308265-804309f1-5d57-4784-ba22-45fe99df5d80.png)
 
-** Método Update **
+# ** Método Update **
 ![aaaaa4](https://user-images.githubusercontent.com/65823769/141308781-51c5d6da-cbc9-45bf-bce0-ba896c0d3277.png)
 ![aaaaa5](https://user-images.githubusercontent.com/65823769/141309078-f5688bd7-d360-4a1e-a64f-be22dd392374.png)
 
-** Base de Datos **
+# ** Base de Datos **
 ![BD0](https://user-images.githubusercontent.com/65823769/141309451-746d98d2-ce86-4492-8e38-9b85acddc373.png)
 ![BD](https://user-images.githubusercontent.com/65823769/141309461-d286f57b-2324-423f-b8e8-ee57e062b4f3.png)
 
